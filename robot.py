@@ -3,7 +3,7 @@
 from table import Table
 from robot_exceptions import DirectionError, RobotPlacementError
 
-DIRECTIONS = ["North", "South", "East", "West"]
+DIRECTIONS = ["West", "South", "East", "North"]
 SIDE = 5
 TABLE = Table(SIDE, SIDE)
 
@@ -11,9 +11,7 @@ TABLE = Table(SIDE, SIDE)
 class Robot(object):
 
     def __init__(self, x, y, direction):
-        self.current_x_coordinate = x
-        self.current_y_coordinate = y
-        self.current_direction = direction
+        self.place(x, y, direction)
 
     @property
     def current_x_coordinate(self):
@@ -69,3 +67,29 @@ class Robot(object):
             self.__current_direction = direction
         else:
             raise DirectionError("Where on earth are you facing?")
+
+    def place(self, x, y, direction):
+        self.current_x_coordinate = x
+        self.current_y_coordinate = y
+        self.current_direction = direction
+
+    def move(self):
+        movement_map = {"North": (0, 1),
+                        "East":  (1, 0),
+                        "South": (0, -1),
+                        "West": (-1, 0)}
+        movement = movement_map[self.current_direction]
+        self.current_x_coordinate = self.current_x_coordinate + movement[0]
+        self.current_y_coordinate = self.current_y_coordinate + movement[1]
+
+    def left(self):
+        index = DIRECTIONS.index(self.current_direction) + 1
+        self.current_direction = DIRECTIONS[index % 4]
+
+    def right(self):
+        index = DIRECTIONS.index(self.current_direction) - 1
+        self.current_direction = DIRECTIONS[index]
+
+    def report(self):
+        return ("Output: %s,%s,%s" % (self.current_x_coordinate, self.current_y_coordinate,
+                                      self.current_direction))

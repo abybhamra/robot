@@ -1,13 +1,13 @@
 # !/usr/bin/env python
 
-from remote import Remote
+from robot import Robot
 from robot_exceptions import RobotPlacementError
 
 
 def main(command):
-    players_remote = Remote()
+    players_robot = Robot()
     try:
-        players_remote.__setattr__(command, command)
+        players_robot.__setattr__(command, command)
     except RobotPlacementError:
         pass
 
