@@ -1,7 +1,7 @@
 """Class to represent the robot
 """
-from table import Table
 from robot_exceptions import DirectionError, RobotPlacementError
+from table import Table
 
 DIRECTIONS = ["West", "South", "East", "North"]
 SIDE = 5
@@ -46,7 +46,7 @@ class Robot(object):
         if not isinstance(y_coordinate, int):
             raise TypeError("y coordinate must be set to an integer")
         if y_coordinate >= SIDE or y_coordinate < 0:
-            raise RobotPlacementError("x coordinate cant be greater than table side, robot will die!")
+            raise RobotPlacementError("y coordinate cant be greater than table side, robot will die!")
         self.__current_y_coordinate = y_coordinate
 
     @property
@@ -75,7 +75,7 @@ class Robot(object):
 
     def move(self):
         movement_map = {"North": (0, 1),
-                        "East":  (1, 0),
+                        "East": (1, 0),
                         "South": (0, -1),
                         "West": (-1, 0)}
         movement = movement_map[self.current_direction]
