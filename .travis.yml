@@ -4,5 +4,11 @@ python:
   - "3.5"
 
 # command to run tests
+install:
+  - pip install codecov
+
 script:
-  - pytest
+  - coverage run tests.py
+
+after_success:
+  - codecov
