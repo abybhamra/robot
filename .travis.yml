@@ -5,8 +5,8 @@ python:
 
 # command to run tests
 install:
-  - pip install codecov
+  - pip install nose2
 
 script:
-  - coverage run --source=./tests
+  - nose2 -v -t . -s tests
   - coverage report -m
